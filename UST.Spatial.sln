@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ccr.PresentationCore", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ccr.WinCore", "..\Ccr\Ccr.WinCore\Ccr.WinCore.csproj", "{E2007A7D-451A-4AC5-874F-638669A45C95}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B05A53E9-567B-458E-8C46-684769702FFA}"
+	ProjectSection(SolutionItems) = preProject
+		Script1.json = Script1.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

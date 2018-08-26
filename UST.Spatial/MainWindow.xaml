@@ -10,6 +10,6 @@
         Title="MainWindow" Height="800" Width="800">
   <Grid>
     <!--<controls:MapViewer State="{x:Static geoJson:State.Arizona}"/>-->
-    <c:MapViewer State="{x:Static g:State.District_of_Columbia}"/>
+    <c:MapViewer State="{x:Static g:State.Texas}"/>
   </Grid>
 </Window>

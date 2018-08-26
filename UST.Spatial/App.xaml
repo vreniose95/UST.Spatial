@@ -8,6 +8,7 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="GeometryMaps/ak.xaml"/>
         <ResourceDictionary Source="GeometryMaps/dc.xaml"/>
+        <ResourceDictionary Source="GeometryMaps/tx.xaml"/>
       </ResourceDictionary.MergedDictionaries>
 
       <Style TargetType="Path">
@@ -40,7 +41,7 @@
                         <Binding Path="ZoomCenterPoint.Y" RelativeSource="{RelativeSource TemplatedParent}"/>
                       </ScaleTransform.CenterY>-->
                     </ScaleTransform>
-                    
+
                   </TransformGroup>
                 </Grid.RenderTransform>
                 <Viewbox RenderTransformOrigin=".5,.5">
@@ -59,7 +60,7 @@
                         <Binding Path="ZoomCenterPoint.Y" RelativeSource="{RelativeSource TemplatedParent}"/>
                       </ScaleTransform.CenterY>-->
                     </ScaleTransform>
-                    
+
                   </Viewbox.RenderTransform>
                   <Canvas>
                     <Canvas.Width>

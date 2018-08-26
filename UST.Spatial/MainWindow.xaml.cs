@@ -1,18 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UST.Spatial.GeoJSON;
+using UST.Spatial.Scripting;
 
 namespace UST.Spatial
 {
@@ -27,8 +18,13 @@ namespace UST.Spatial
      // Loaded += OnLoaded;
     }
 
+    private static readonly string folderRoot = @"C:\Users\Eric\Desktop\Maps\SVG\";
+
     private void OnLoaded(object Sender, RoutedEventArgs E)
     {
+      JsonXamlPostProcessor.ProcessSVGToXaml(
+        new FileInfo($"{folderRoot}tx.svg"),
+        State.Texas);
     }
   }
 }

@@ -16,11 +16,24 @@ namespace UST.Spatial.GeoJSON
       var mapKey
         = $"Maps.{state.Abbreviation}";
 
-      var o = System.Windows.Application.Current.FindResource(mapKey);
+      var resource = System
+        .Windows
+        .Application
+        .Current
+        .FindResource(
+          mapKey);
 
-      var s = (GeometryGroup) o;
-      return s;
+      switch (resource)
+      {
+        case GeometryGroup geometryGroup:
+          return geometryGroup;
 
+        case StateGeometry stateGeometry:
+          return stateGeometry.GeometryGroup;
+
+        default:
+          throw new NotSupportedException();
+      }
     }
     
   }

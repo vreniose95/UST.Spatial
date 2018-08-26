@@ -67,19 +67,19 @@ namespace UST.Spatial.GeoJSON
     ///   A <see cref="bool"/> value indicating whether or not Monday delivery is scheduled.
     /// </param>
     /// <param name="tuesday">
-    ///   A <see cref="bool"/> value indicating whether or not Sunday delivery is scheduled.
+    ///   A <see cref="bool"/> value indicating whether or not Tuesday delivery is scheduled.
     /// </param>
     /// <param name="wednesday">
-    ///   A <see cref="bool"/> value indicating whether or not Sunday delivery is scheduled.
+    ///   A <see cref="bool"/> value indicating whether or not Wednesday delivery is scheduled.
     /// </param>
     /// <param name="thursday">
-    /// A <see cref="bool"/> value indicating whether or not Sunday delivery is scheduled.
+    /// A <see cref="bool"/> value indicating whether or not Thursday delivery is scheduled.
     /// </param>
     /// <param name="friday">
-    /// A <see cref="bool"/> value indicating whether or not Sunday delivery is scheduled.
+    /// A <see cref="bool"/> value indicating whether or not Friday delivery is scheduled.
     /// </param>
     /// <param name="saturday">
-    /// A <see cref="bool"/> value indicating whether or not Sunday delivery is scheduled.
+    /// A <see cref="bool"/> value indicating whether or not Saturday delivery is scheduled.
     /// </param>
     public ZipCodeDeliverySchedule(
       bool sunday,
