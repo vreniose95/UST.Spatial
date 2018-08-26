@@ -6,6 +6,9 @@ using System.Text;
 using Ccr.Core.Extensions;
 namespace UST.Spatial.GeoJSON
 {
+  /// <summary>
+  /// heres a summary
+  /// </summary>
   [DebuggerDisplay("ToString()")]
   public class ZipCodeDeliverySchedule
   {
