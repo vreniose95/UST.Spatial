@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FAFB4186-4666-4C5A-AE36-B55672A78A29}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>UST.Spatial</RootNamespace>
+    <AssemblyName>UST.Spatial</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="GeometryMaps\ak.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GeometryMaps\dc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\MapViewer.cs" />
+    <Compile Include="Controls\ZoomStage.cs" />
+    <Compile Include="GeoJSON\DeliverOnDays.cs" />
+    <Compile Include="GeoJSON\GeoSVGReader.cs" />
+    <Compile Include="GeoJSON\State.cs" />
+    <Compile Include="GeoJSON\State.Seed.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="GeoJSON\Maps\ak_alaska_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\al_alabama_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ar_arkansas_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\az_arizona_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ca_california_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\co_colorado_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ct_connecticut_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\dc_district_of_columbia_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\de_delaware_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\fl_florida_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ga_georgia_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\hi_hawaii_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ia_iowa_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\id_idaho_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\il_illinois_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\in_indiana_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ks_kansas_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ky_kentucky_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\la_louisiana_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ma_massachusetts_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\md_maryland_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\me_maine_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\mi_michigan_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\mn_minnesota_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\mo_missouri_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ms_mississippi_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\mt_montana_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\nc_north_carolina_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\nd_north_dakota_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ne_nebraska_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\nh_new_hampshire_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\nj_new_jersey_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\nm_new_mexico_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\nv_nevada_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ny_new_york_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\oh_ohio_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ok_oklahoma_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\or_oregon_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\pa_pennsylvania_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\README.md" />
+    <None Include="GeoJSON\Maps\ri_rhode_island_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\sc_south_carolina_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\sd_south_dakota_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\tn_tennessee_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\tx_texas_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\ut_utah_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\va_virginia_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\vt_vermont_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\wa_washington_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\wi_wisconsin_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\wv_west_virginia_zip_codes_geo.min.json" />
+    <None Include="GeoJSON\Maps\wy_wyoming_zip_codes_geo.min.json" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GeoJSON\Maps\SVG\ak.svg" />
+    <Content Include="GeoJSON\Maps\SVG\dc.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ccr\Ccr.Core\Ccr.Core.csproj">
+      <Project>{4d333afd-4cac-464a-b99e-2f7ed4c4199a}</Project>
+      <Name>Ccr.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ccr\Ccr.PresentationCore\Ccr.PresentationCore.csproj">
+      <Project>{d706091c-958d-43cc-96b2-229829ea325b}</Project>
+      <Name>Ccr.PresentationCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
