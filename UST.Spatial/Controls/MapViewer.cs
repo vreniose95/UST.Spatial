@@ -13,18 +13,28 @@ namespace UST.Spatial.Controls
   public class MapViewer
     : Control
   {
+    private Canvas PART_Canvas;
+
+
     public static readonly DependencyProperty StateProperty = DP.Register(
       new Meta<MapViewer, State>(null, onStatePropertyChanged));
 
     public static readonly DependencyProperty GeometryProperty = DP.Register(
       new Meta<MapViewer, PathGeometry>());
-
-
+    
     public static readonly DependencyProperty ZoomCenterPointProperty = DP.Register(
       new Meta<MapViewer, Point>());
 
     public static readonly DependencyProperty ZoomPercentageProperty = DP.Register(
       new Meta<MapViewer, double>(1));
+
+    public static readonly DependencyProperty ZoomPercentageLevel2Property = DP.Register(
+      new Meta<MapViewer, double>());
+    public double ZoomPercentageLevel2
+    {
+      get { return (double) GetValue(ZoomPercentageLevel2Property); }
+      set { SetValue(ZoomPercentageLevel2Property, value); }
+    }
 
     public static readonly DependencyProperty ZoomStageProperty = DP.Register(
       new Meta<MapViewer, ZoomStage>(ZoomStage.Stage1));
@@ -66,6 +76,13 @@ namespace UST.Spatial.Controls
     }
 
 
+    public override void OnApplyTemplate()
+    {
+      base.OnApplyTemplate();
+
+      PART_Canvas = (Canvas)GetTemplateChild(nameof(PART_Canvas));
+    }
+
     private static void onStatePropertyChanged(
       MapViewer @this,
       DPChangedEventArgs<State> args)
@@ -74,6 +91,21 @@ namespace UST.Spatial.Controls
       var pathGeometry = PathGeometry.CreateFromGeometry(geometry);
 
       @this.Geometry = pathGeometry;
+
+      //foreach (var e in @this.Geometry.Figures)
+      //{
+      //  @this.PART_Canvas.Children.Add(new Path()
+      //  {
+      //    Data = new PathGeometry
+      //    {
+      //      Figures = new PathFigureCollection
+      //      {
+      //        e
+      //      }
+      //    }
+      //  });
+      //}
+
     }
 
 

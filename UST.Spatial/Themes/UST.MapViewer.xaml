@@ -1,0 +1,131 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:UST.Spatial.Controls"
+                    xmlns:converters="clr-namespace:UST.Spatial.Markup.Converters"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+
+	<converters:PathFigureToPathFigureGeometryConverter x:Key="pf2pfgc"/>
+
+	<Style TargetType="Path" x:Key="PathStyle">
+		<Setter Property="Fill" Value="#021019"/>
+		<Setter Property="Stroke" Value="#144b53"/>
+		<Setter Property="StrokeThickness" Value=".5"/>
+	</Style>
+
+	<Style TargetType="controls:MapViewer">
+		<Setter Property="Background" Value="#021019"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:MapViewer">
+					<Grid Background="{TemplateBinding Background}">
+						<xctk:Zoombox MinScale="0.75" 
+						              MaxScale="20">
+							<Viewbox RenderTransformOrigin=".5,.5">
+								<Viewbox.RenderTransform>
+									<ScaleTransform>
+										<ScaleTransform.ScaleX>
+											1
+										</ScaleTransform.ScaleX>
+										<ScaleTransform.ScaleY>
+											1.3
+										</ScaleTransform.ScaleY>
+									</ScaleTransform>
+								</Viewbox.RenderTransform>
+								<Canvas x:Name="PART_Canvas">
+									<Canvas.Width>
+										<Binding RelativeSource="{RelativeSource TemplatedParent}" 
+									         Path="Geometry.Bounds.Width"/>
+									</Canvas.Width>
+									<Canvas.Height>
+										<Binding RelativeSource="{RelativeSource TemplatedParent}" 
+									         Path="Geometry.Bounds.Height"/>
+									</Canvas.Height>
+									<ItemsControl>
+										<ItemsControl.ItemsPanel>
+											<ItemsPanelTemplate>
+												<Canvas/>
+											</ItemsPanelTemplate>
+										</ItemsControl.ItemsPanel>
+										<ItemsControl.ItemsSource>
+											<Binding RelativeSource="{RelativeSource TemplatedParent}"
+										         Path="Geometry.Figures"/>
+										</ItemsControl.ItemsSource>
+										<ItemsControl.ItemTemplate>
+											<DataTemplate DataType="PathFigure">
+												<Path x:Name="PART_Path" 
+												      Style="{StaticResource PathStyle}">
+													<Path.Data>
+														<PathGeometry>
+															<PathGeometry.Figures>
+																<Binding Converter="{StaticResource pf2pfgc}"/>
+															</PathGeometry.Figures>
+														</PathGeometry>
+													</Path.Data>
+												</Path>
+												<DataTemplate.Triggers>
+													<EventTrigger SourceName="PART_Path"
+													              RoutedEvent="MouseDown">
+														<EventTrigger.Actions>
+															<BeginStoryboard>
+																<Storyboard>
+																	<ObjectAnimationUsingKeyFrames Duration="0:0:0" 
+																																 Storyboard.TargetName="PART_Path"
+																																 Storyboard.TargetProperty="Fill">
+																		<DiscreteObjectKeyFrame Value="{x:Static Brushes.Orange}" KeyTime="0"/>
+																	</ObjectAnimationUsingKeyFrames>
+																</Storyboard>
+															</BeginStoryboard>
+														</EventTrigger.Actions>
+													</EventTrigger>
+													<DataTrigger Value="True">
+														<DataTrigger.Binding>
+															<Binding ElementName="PART_Path" Path="IsMouseOver" />
+														</DataTrigger.Binding>
+														<Setter TargetName="PART_Path" Property="Stroke" Value="Red"/>
+													</DataTrigger>
+												</DataTemplate.Triggers>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+									</ItemsControl>
+								</Canvas>
+							</Viewbox>
+						</xctk:Zoombox>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>
+
+<!--<Grid.RenderTransformOrigin>
+							<Binding Path="ZoomCenterPoint" RelativeSource="{RelativeSource TemplatedParent}" />
+						</Grid.RenderTransformOrigin>
+						<Grid.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform>
+									<ScaleTransform.ScaleX>
+										<Binding Path="ZoomPercentage" RelativeSource="{RelativeSource TemplatedParent}" />
+									</ScaleTransform.ScaleX>
+									<ScaleTransform.ScaleY>
+										<Binding Path="ZoomPercentage" RelativeSource="{RelativeSource TemplatedParent}" />
+									</ScaleTransform.ScaleY>
+								</ScaleTransform>
+							</TransformGroup>
+						</Grid.RenderTransform>-->
+
+
+
+
+<!--<ScaleTransform.CenterX>
+                        <Binding Path="ZoomCenterPoint.X" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </ScaleTransform.CenterX>
+                      <ScaleTransform.CenterY>
+                        <Binding Path="ZoomCenterPoint.Y" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </ScaleTransform.CenterY>-->
+
+<!--<ScaleTransform.CenterX>
+                        <Binding Path="ZoomCenterPoint.X" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </ScaleTransform.CenterX>
+                      <ScaleTransform.CenterY>
+                        <Binding Path="ZoomCenterPoint.Y" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </ScaleTransform.CenterY>-->

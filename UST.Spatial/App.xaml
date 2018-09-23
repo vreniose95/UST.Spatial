@@ -1,85 +1,19 @@
 ﻿<Application x:Class="UST.Spatial.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="clr-namespace:UST.Spatial.Controls"
-             StartupUri="MainWindow.xaml">
-  <Application.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="GeometryMaps/ak.xaml"/>
-        <ResourceDictionary Source="GeometryMaps/dc.xaml"/>
-        <ResourceDictionary Source="GeometryMaps/tx.xaml"/>
-      </ResourceDictionary.MergedDictionaries>
-
-      <Style TargetType="Path">
-        <Setter Property="Stroke" Value="#144b53"/>
-        <Setter Property="StrokeThickness" Value="1"/>
-      </Style>
-
-      <Style TargetType="controls:MapViewer">
-        <Setter Property="Background" Value="#021019"/>
-        <Setter Property="Template">
-          <Setter.Value>
-            <ControlTemplate TargetType="controls:MapViewer">
-              <Grid Background="{TemplateBinding Background}">
-                <Grid.RenderTransformOrigin>
-                  <Binding Path="ZoomCenterPoint" RelativeSource="{RelativeSource TemplatedParent}" />
-                </Grid.RenderTransformOrigin>
-                <Grid.RenderTransform>
-                  <TransformGroup>
-                    <ScaleTransform>
-                      <ScaleTransform.ScaleX>
-                        <Binding Path="ZoomPercentage" RelativeSource="{RelativeSource TemplatedParent}" />
-                      </ScaleTransform.ScaleX>
-                      <ScaleTransform.ScaleY>
-                        <Binding Path="ZoomPercentage" RelativeSource="{RelativeSource TemplatedParent}" />
-                      </ScaleTransform.ScaleY>
-                      <!--<ScaleTransform.CenterX>
-                        <Binding Path="ZoomCenterPoint.X" RelativeSource="{RelativeSource TemplatedParent}"/>
-                      </ScaleTransform.CenterX>
-                      <ScaleTransform.CenterY>
-                        <Binding Path="ZoomCenterPoint.Y" RelativeSource="{RelativeSource TemplatedParent}"/>
-                      </ScaleTransform.CenterY>-->
-                    </ScaleTransform>
-
-                  </TransformGroup>
-                </Grid.RenderTransform>
-                <Viewbox RenderTransformOrigin=".5,.5">
-                  <Viewbox.RenderTransform>
-                    <ScaleTransform>
-                      <ScaleTransform.ScaleX>
-                        1
-                      </ScaleTransform.ScaleX>
-                      <ScaleTransform.ScaleY>
-                        1.3
-                      </ScaleTransform.ScaleY>
-                      <!--<ScaleTransform.CenterX>
-                        <Binding Path="ZoomCenterPoint.X" RelativeSource="{RelativeSource TemplatedParent}"/>
-                      </ScaleTransform.CenterX>
-                      <ScaleTransform.CenterY>
-                        <Binding Path="ZoomCenterPoint.Y" RelativeSource="{RelativeSource TemplatedParent}"/>
-                      </ScaleTransform.CenterY>-->
-                    </ScaleTransform>
-
-                  </Viewbox.RenderTransform>
-                  <Canvas>
-                    <Canvas.Width>
-                      <Binding RelativeSource="{RelativeSource TemplatedParent}" 
-                               Path="Geometry.Bounds.Width" />
-                    </Canvas.Width>
-                    <Canvas.Height>
-                      <Binding RelativeSource="{RelativeSource TemplatedParent}" 
-                               Path="Geometry.Bounds.Height" />
-                    </Canvas.Height>
-                    <Path Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Geometry}"/>
-                  </Canvas>
-                </Viewbox>
-              </Grid>
-            </ControlTemplate>
-          </Setter.Value>
-        </Setter>
-      </Style>
-    </ResourceDictionary>
-
-  </Application.Resources>
+             xmlns:spatial="clr-namespace:UST.Spatial">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/Ccr.MDHybrid;component/MDHybrid/Themes/Generic.xaml"/>
+				<ResourceDictionary>
+					<spatial:AppBootstrapper x:Key="bootstrapper" />
+				</ResourceDictionary>
+				<ResourceDictionary Source="GeometryMaps/ak.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/dc.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/tx.xaml"/>
+				<ResourceDictionary Source="Themes/UST.MapViewer.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>
