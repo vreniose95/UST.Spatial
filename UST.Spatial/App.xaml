@@ -1,13 +1,14 @@
 ﻿<Application x:Class="UST.Spatial.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:spatial="clr-namespace:UST.Spatial">
+             xmlns:spatial="clr-namespace:UST.Spatial"
+             StartupUri="MainWindow.xaml">
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/Ccr.MDHybrid;component/MDHybrid/Themes/Generic.xaml"/>
 				<ResourceDictionary>
-					<spatial:AppBootstrapper x:Key="bootstrapper" />
+					<!--<spatial:AppBootstrapper x:Key="bootstrapper" />-->
 				</ResourceDictionary>
 				<ResourceDictionary Source="GeometryMaps/ak.xaml"/>
 				<ResourceDictionary Source="GeometryMaps/dc.xaml"/>
