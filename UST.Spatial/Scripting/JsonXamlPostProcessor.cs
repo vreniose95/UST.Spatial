@@ -46,16 +46,20 @@ namespace UST.Spatial.Scripting
       if (!inputSvgFile.Exists || inputSvgFile.Extension != ".svg")
         throw new NotSupportedException();
 
-      var targetOutputPath = inputSvgFile.Directory.CreateSubdirectory("SVG_2").FullName
-                             + $@"\{state.Abbreviation.ToLower()}.xaml";
+      var targetOutputPath = inputSvgFile.Directory.Parent.FullName + @"\XAML\"
+                             + $@"\{state.Value.Abbreviation.ToLower()}.xaml";
 
       var targetOutputFileInfo = new FileInfo(targetOutputPath);
 
       if (targetOutputFileInfo.Exists || targetOutputFileInfo.Extension != ".xaml")
         throw new NotSupportedException();
 
+      var expectedJsonFileName =
+        $"{state.Value.Abbreviation}_{state.Value.StateName.Replace(" ", "_")}_zip_codes_geo.min"
+          .ToLower();
+
       var jsonZipSource = new FileInfo(
-        inputSvgFile.Directory.FullName + $@"\{state.Abbreviation.ToLower()}.json");
+        inputSvgFile.Directory.Parent.FullName + $@"\JSON\{expectedJsonFileName}.json");
 
       var extractedZipCodesInState = ExtractJsonZipCodes(
           jsonZipSource)
@@ -72,11 +76,11 @@ namespace UST.Spatial.Scripting
         streamWriter.WriteLine(
           "xmlns:geo=\"clr-namespace:UST.Spatial.GeoJSON\">");
 
-        streamWriter.WriteLine(
-          "xmlns:po=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation/options\">");
+        //streamWriter.WriteLine(
+        //  "xmlns:po=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation/options\">");
 
         streamWriter.WriteLine(
-          $"\t<geo:StateGeometry x:Key=\"Maps.{state.Abbreviation.ToUpper()}\">");
+          $"\t<geo:StateGeometry x:Key=\"Maps.{state.Value.Abbreviation.ToUpper()}\">");
 
         var index = 0;
 
@@ -128,7 +132,7 @@ namespace UST.Spatial.Scripting
         throw new NotSupportedException();
 
       var targetOutputPath = inputSvgFile.Directory.CreateSubdirectory("SVG_2").FullName
-                             + $@"\{state.Abbreviation.ToLower()}.xaml";
+                             + $@"\{state.Value.Abbreviation.ToLower()}.xaml";
 
       var targetOutputFileInfo = new FileInfo(targetOutputPath);
 
@@ -136,7 +140,7 @@ namespace UST.Spatial.Scripting
         throw new NotSupportedException();
 
       var jsonZipSource = new FileInfo(
-        inputSvgFile.Directory.FullName + $@"\{state.Abbreviation.ToLower()}.json");
+        inputSvgFile.Directory.FullName + $@"\{state.Value.Abbreviation.ToLower()}.json");
 
       var extractedZipCodesInState = ExtractJsonZipCodes(
           jsonZipSource)
@@ -157,7 +161,7 @@ namespace UST.Spatial.Scripting
           "\t\t\txmlns:po=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation/options\">");
 
         streamWriter.WriteLine(
-          $"\t<GeometryGroup x:Key=\"Maps.{state.Abbreviation.ToUpper()}\" po:Freeze=\"True\">");
+          $"\t<GeometryGroup x:Key=\"Maps.{state.Value.Abbreviation.ToUpper()}\" po:Freeze=\"True\">");
 
         var index = 0;
 

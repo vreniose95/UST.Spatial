@@ -1,32 +1,21 @@
 ﻿using System.Runtime.CompilerServices;
+using Ccr.PresentationCore.Collections;
 
 namespace UST.Spatial.GeoJSON
 {
 	public partial class State
+    : ValueEnum<(string Abbreviation, string StateName)>
 	{
 		public int StateID { get; set; }
 
-		public string Abbreviation { get; set; }
 
-		public string StateName { get; set; }
-
-
-		private State() { }
-
-		public State(
-			string abbreviation,
-			string stateName) : this()
-		{
-			Abbreviation = abbreviation;
-			StateName = stateName;
-		}
-
-		private State(
+	  private State(
 			int stateID,
 			string abbreviation,
-			[CallerMemberName] string memberName = "") : this(
-				abbreviation,
-				memberName.Replace('_', ' '))
+			[CallerMemberName] string memberName = "") 
+		    : this(
+		      (abbreviation,
+		      memberName.Replace('_', ' ')))
 		{
 			StateID = stateID;
 		}

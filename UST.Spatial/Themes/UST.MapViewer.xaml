@@ -18,7 +18,8 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:MapViewer">
 					<Grid Background="{TemplateBinding Background}">
-						<xctk:Zoombox MinScale="0.75" 
+						<xctk:Zoombox x:Name="PART_Zoombox" 
+						              MinScale="0.75"
 						              MaxScale="20">
 							<Viewbox RenderTransformOrigin=".5,.5">
 								<Viewbox.RenderTransform>
@@ -54,6 +55,17 @@
 											<DataTemplate DataType="PathFigure">
 												<Path x:Name="PART_Path" 
 												      Style="{StaticResource PathStyle}">
+													<Path.StrokeThickness>
+														<MultiBinding Converter="{converters:ZoomViewScaleToStrokeThicknessConverter}"
+														              ConverterParameter=".5">
+															<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
+															         Path="Scale"/>
+															<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
+																			 Path="MinScale"/>
+															<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
+															         Path="MaxScale"/>
+														</MultiBinding>
+													</Path.StrokeThickness>
 													<Path.Data>
 														<PathGeometry>
 															<PathGeometry.Figures>
@@ -71,7 +83,8 @@
 																	<ObjectAnimationUsingKeyFrames Duration="0:0:0" 
 																																 Storyboard.TargetName="PART_Path"
 																																 Storyboard.TargetProperty="Fill">
-																		<DiscreteObjectKeyFrame Value="{x:Static Brushes.Orange}" KeyTime="0"/>
+																		<DiscreteObjectKeyFrame Value="{x:Static Brushes.Orange}" 
+																		                        KeyTime="0"/>
 																	</ObjectAnimationUsingKeyFrames>
 																</Storyboard>
 															</BeginStoryboard>

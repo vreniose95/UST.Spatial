@@ -14,7 +14,7 @@ namespace UST.Spatial.GeoJSON
       State state)
     {
       var mapKey
-        = $"Maps.{state.Abbreviation}";
+        = $"Maps.{state.Value.Abbreviation}";
 
       var resource = System
         .Windows

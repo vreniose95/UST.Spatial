@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
 namespace UST.Spatial.GeoJSON
 {
@@ -157,5 +158,8 @@ namespace UST.Spatial.GeoJSON
     public static State District_of_Columbia
       = new State(51, "DC");
 
+    protected State([NotNull] (string Abbreviation, string StateName) value, [NotNull, UsedImplicitly] string fieldName = "", int line = 0) : base(value, fieldName, line)
+    {
+    }
   }
 }

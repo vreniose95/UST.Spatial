@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using Ccr.PresentationCore.Collections;
 using UST.Spatial.GeoJSON;
 using UST.Spatial.Scripting;
 
@@ -15,16 +16,34 @@ namespace UST.Spatial
     public MainWindow()
     {
       InitializeComponent();
-     // Loaded += OnLoaded;
+      Loaded += OnLoaded;
     }
 
-    private static readonly string folderRoot = @"C:\Users\Eric\Desktop\Maps\SVG\";
+    private static readonly string folderRoot = @"C:\Users\Eric\Desktop\Maps\";
 
     private void OnLoaded(object Sender, RoutedEventArgs E)
     {
-      JsonXamlPostProcessor.ProcessSVGToXaml(
-        new FileInfo($"{folderRoot}tx.svg"),
-        State.Texas);
+      var rootDirectoryInfo = new DirectoryInfo(folderRoot);
+
+      var svgDirectoryInfo = new DirectoryInfo(folderRoot + @"SVG\");
+      var jsonDirectoryInfo = new DirectoryInfo(folderRoot + @"JSON\");
+      var xamlDirectoryInfo = new DirectoryInfo(folderRoot + @"XAML\");
+
+      foreach (var svgFile in svgDirectoryInfo.GetFiles())
+      {
+        var stateAbbreviation = svgFile.Name.Substring(0, 2);
+        var state = ValueEnum.ParseSelect<State, string>(
+          t => t.Value.Abbreviation,
+          stateAbbreviation,
+          true);
+
+        JsonXamlPostProcessor.ProcessSVGToXaml(
+          svgFile,
+          state);
+
+      }
+
+
     }
   }
 }

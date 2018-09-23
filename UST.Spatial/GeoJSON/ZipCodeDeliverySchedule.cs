@@ -19,7 +19,7 @@ namespace UST.Spatial.GeoJSON
         [DayOfWeek.Monday] = t => t.Monday,
         [DayOfWeek.Tuesday] = t => t.Tuesday,
         [DayOfWeek.Wednesday] = t => t.Wednesday,
-        [DayOfWeek.Thursday] = t => t.Sunday,
+        [DayOfWeek.Thursday] = t => t.Thursday,
         [DayOfWeek.Friday] = t => t.Friday,
         [DayOfWeek.Saturday] = t => t.Saturday
       };
