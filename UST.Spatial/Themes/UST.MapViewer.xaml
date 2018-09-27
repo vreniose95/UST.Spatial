@@ -1,45 +1,35 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿
+	<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:UST.Spatial.Controls"
-                    xmlns:converters="clr-namespace:UST.Spatial.Markup.Converters"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+                    xmlns:c="clr-namespace:UST.Spatial.Controls"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:geoJson="clr-namespace:UST.Spatial.GeoJSON">
 
-	<converters:PathFigureToPathFigureGeometryConverter x:Key="pf2pfgc"/>
-
-	<Style TargetType="Path" x:Key="PathStyle">
-		<Setter Property="Fill" Value="#021019"/>
-		<Setter Property="Stroke" Value="#144b53"/>
-		<Setter Property="StrokeThickness" Value=".5"/>
-	</Style>
-
-	<Style TargetType="controls:MapViewer">
+	<Style TargetType="c:MapViewer">
 		<Setter Property="Background" Value="#021019"/>
+		<!--<Setter Property="ZipCodeShapeStroke" Value="#144b53"/>
+		<Setter Property="ZipCodeShapeStrokeThickness" Value=".5"/>-->
+
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="controls:MapViewer">
+				<ControlTemplate TargetType="c:MapViewer">
 					<Grid Background="{TemplateBinding Background}">
 						<xctk:Zoombox x:Name="PART_Zoombox" 
 						              MinScale="0.75"
 						              MaxScale="20">
 							<Viewbox RenderTransformOrigin=".5,.5">
 								<Viewbox.RenderTransform>
-									<ScaleTransform>
-										<ScaleTransform.ScaleX>
-											1
-										</ScaleTransform.ScaleX>
-										<ScaleTransform.ScaleY>
-											1.3
-										</ScaleTransform.ScaleY>
+									<ScaleTransform ScaleX="1" ScaleY="1.3">
 									</ScaleTransform>
 								</Viewbox.RenderTransform>
 								<Canvas x:Name="PART_Canvas">
 									<Canvas.Width>
 										<Binding RelativeSource="{RelativeSource TemplatedParent}" 
-									         Path="Geometry.Bounds.Width"/>
+										         Path="StateDeclaration.GeometryGroup.Bounds.Width"/>
 									</Canvas.Width>
 									<Canvas.Height>
 										<Binding RelativeSource="{RelativeSource TemplatedParent}" 
-									         Path="Geometry.Bounds.Height"/>
+										         Path="StateDeclaration.GeometryGroup.Bounds.Height"/>
 									</Canvas.Height>
 									<ItemsControl>
 										<ItemsControl.ItemsPanel>
@@ -49,54 +39,13 @@
 										</ItemsControl.ItemsPanel>
 										<ItemsControl.ItemsSource>
 											<Binding RelativeSource="{RelativeSource TemplatedParent}"
-										         Path="Geometry.Figures"/>
+											         Path="StateDeclaration.ZipCodeDeclarations"/>
+											<!--<Binding RelativeSource="{RelativeSource TemplatedParent}"
+											         Path="Geometry.Figures"/>-->
 										</ItemsControl.ItemsSource>
 										<ItemsControl.ItemTemplate>
-											<DataTemplate DataType="PathFigure">
-												<Path x:Name="PART_Path" 
-												      Style="{StaticResource PathStyle}">
-													<Path.StrokeThickness>
-														<MultiBinding Converter="{converters:ZoomViewScaleToStrokeThicknessConverter}"
-														              ConverterParameter=".5">
-															<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
-															         Path="Scale"/>
-															<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
-																			 Path="MinScale"/>
-															<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
-															         Path="MaxScale"/>
-														</MultiBinding>
-													</Path.StrokeThickness>
-													<Path.Data>
-														<PathGeometry>
-															<PathGeometry.Figures>
-																<Binding Converter="{StaticResource pf2pfgc}"/>
-															</PathGeometry.Figures>
-														</PathGeometry>
-													</Path.Data>
-												</Path>
-												<DataTemplate.Triggers>
-													<EventTrigger SourceName="PART_Path"
-													              RoutedEvent="MouseDown">
-														<EventTrigger.Actions>
-															<BeginStoryboard>
-																<Storyboard>
-																	<ObjectAnimationUsingKeyFrames Duration="0:0:0" 
-																																 Storyboard.TargetName="PART_Path"
-																																 Storyboard.TargetProperty="Fill">
-																		<DiscreteObjectKeyFrame Value="{x:Static Brushes.Orange}" 
-																		                        KeyTime="0"/>
-																	</ObjectAnimationUsingKeyFrames>
-																</Storyboard>
-															</BeginStoryboard>
-														</EventTrigger.Actions>
-													</EventTrigger>
-													<DataTrigger Value="True">
-														<DataTrigger.Binding>
-															<Binding ElementName="PART_Path" Path="IsMouseOver" />
-														</DataTrigger.Binding>
-														<Setter TargetName="PART_Path" Property="Stroke" Value="Red"/>
-													</DataTrigger>
-												</DataTemplate.Triggers>
+											<DataTemplate DataType="geoJson:ZipCodeDeclaration">
+												<c:ZipCodeGeometryPresenter ZipCodeDeclaration="{Binding}" />
 											</DataTemplate>
 										</ItemsControl.ItemTemplate>
 									</ItemsControl>

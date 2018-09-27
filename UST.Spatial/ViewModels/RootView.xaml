@@ -5,14 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:views="clr-namespace:UST.Spatial.Views"
-             xmlns:controls="clr-namespace:UST.Spatial.Controls"
-             xmlns:g="clr-namespace:UST.Spatial.GeoJSON"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance views:RootViewModel, IsDesignTimeCreatable=True}"
              cal:Bind.AtDesignTime="True"
              Designer.Viewport="HD720"
              Designer.Orientation="Landscape">
-	<Grid>
-		<controls:MapViewer State="{x:Static g:State.Texas}"/>
+	<Grid Background="Red">
+		<!--<controls:MapViewer State="{x:Static g:State.Texas}"/>-->
 	</Grid>
 </UserControl>

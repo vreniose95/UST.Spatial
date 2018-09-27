@@ -1,40 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Media;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace UST.Spatial.GeoJSON
 {
   public class GeoSVGReader
   {
+		//public static GeometryGroup Read(
+    //  State state)
+    //{
+    //  var mapKey
+    //    = $"Maps.{state.Value.Abbreviation}";
 
-    public static GeometryGroup Read(
-      State state)
-    {
-      var mapKey
-        = $"Maps.{state.Value.Abbreviation}";
+    //  var resource = System
+    //    .Windows
+    //    .Application
+    //    .Current
+    //    .FindResource(
+    //      mapKey);
 
-      var resource = System
-        .Windows
-        .Application
-        .Current
-        .FindResource(
-          mapKey);
+    //  switch (resource)
+    //  {
+    //    case GeometryGroup geometryGroup:
+    //      return geometryGroup;
 
-      switch (resource)
-      {
-        case GeometryGroup geometryGroup:
-          return geometryGroup;
+    //    case StateDeclaration stateGeometry:
+    //      return stateGeometry.GeometryGroup;
 
-        case StateGeometry stateGeometry:
-          return stateGeometry.GeometryGroup;
+    //    default:
+    //      throw new NotSupportedException();
+    //  }
+    //}
 
-        default:
-          throw new NotSupportedException();
-      }
-    }
-    
-  }
+	  public static StateDeclaration ReadStateDeclaration(
+		  State state)
+	  {
+		  var mapKey
+			  = $"Maps.{state.Value.Abbreviation}";
+
+		  var resource = System
+			  .Windows
+			  .Application
+			  .Current
+			  .FindResource(
+				  mapKey);
+
+		  switch (resource)
+		  {
+			  case StateDeclaration stateGeometry:
+				  return stateGeometry;
+
+			  default:
+				  throw new NotSupportedException();
+		  }
+	  }
+
+	}
 }

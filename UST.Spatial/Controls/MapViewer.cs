@@ -4,8 +4,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using Ccr.Core.Extensions;
 using Ccr.PresentationCore.Helpers.DependencyHelpers;
+using Ccr.PresentationCore.Helpers.EventHelpers;
 using UST.Spatial.GeoJSON;
 
 namespace UST.Spatial.Controls
@@ -19,94 +21,127 @@ namespace UST.Spatial.Controls
     public static readonly DependencyProperty StateProperty = DP.Register(
       new Meta<MapViewer, State>(null, onStatePropertyChanged));
 
-    public static readonly DependencyProperty GeometryProperty = DP.Register(
-      new Meta<MapViewer, PathGeometry>());
-    
-    public static readonly DependencyProperty ZoomCenterPointProperty = DP.Register(
+		//public static readonly DependencyProperty GeometryProperty = DP.Register(
+  //    new Meta<MapViewer, PathGeometry>());
+
+	  public static readonly DependencyProperty StateDeclarationProperty = DP.Register(
+		  new Meta<MapViewer, StateDeclaration>());
+	  
+
+		public static readonly DependencyProperty ZoomCenterPointProperty = DP.Register(
       new Meta<MapViewer, Point>());
 
     public static readonly DependencyProperty ZoomPercentageProperty = DP.Register(
       new Meta<MapViewer, double>(1));
 
-    public static readonly DependencyProperty ZoomPercentageLevel2Property = DP.Register(
-      new Meta<MapViewer, double>());
-    public double ZoomPercentageLevel2
-    {
-      get { return (double) GetValue(ZoomPercentageLevel2Property); }
-      set { SetValue(ZoomPercentageLevel2Property, value); }
-    }
 
-    public static readonly DependencyProperty ZoomStageProperty = DP.Register(
-      new Meta<MapViewer, ZoomStage>(ZoomStage.Stage1));
+	  public static readonly DependencyProperty ZipCodeBoundaryStrokeProperty = DP.Register(
+		  new Meta<MapViewer, SolidColorBrush>(Brushes.Chartreuse));
+
+	  public static readonly DependencyProperty ZipCodeBoundaryStrokeThicknessProperty = DP.Register(
+		  new Meta<MapViewer, double>(0.25d));
 
 
+		
+		//public PathGeometry Geometry
+  //  {
+  //    get => (PathGeometry) GetValue(GeometryProperty);
+  //    set => SetValue(GeometryProperty, value);
+  //  }
 
-    public PathGeometry Geometry
-    {
-      get => (PathGeometry) GetValue(GeometryProperty);
-      set => SetValue(GeometryProperty, value);
-    }
-    public State State
+	  public State State
     {
       get => (State) GetValue(StateProperty);
       set => SetValue(StateProperty, value);
     }
 
-    public Point ZoomCenterPoint
+	  public StateDeclaration StateDeclaration
+	  {
+		  get => (StateDeclaration)GetValue(StateDeclarationProperty);
+		  set => SetValue(StateDeclarationProperty, value);
+	  }
+
+
+		public Point ZoomCenterPoint
     {
       get => (Point) GetValue(ZoomCenterPointProperty);
       set => SetValue(ZoomCenterPointProperty, value);
     }
+
     public double ZoomPercentage
     {
       get => (double) GetValue(ZoomPercentageProperty);
       set => SetValue(ZoomPercentageProperty, value);
     }
+		
 
-    public ZoomStage ZoomStage
-    {
-      get => (ZoomStage) GetValue(ZoomStageProperty);
-      set => SetValue(ZoomStageProperty, value);
-    }
+		public SolidColorBrush ZipCodeBoundaryStroke
+	  {
+		  get => (SolidColorBrush) GetValue(ZipCodeBoundaryStrokeProperty);
+		  set => SetValue(ZipCodeBoundaryStrokeProperty, value);
+	  }
 
+	  public double ZipCodeBoundaryStrokeThickness
+	  {
+		  get => (double) GetValue(ZipCodeBoundaryStrokeThicknessProperty);
+		  set => SetValue(ZipCodeBoundaryStrokeThicknessProperty, value);
+	  }
+		
 
-    static MapViewer()
+		static MapViewer()
     {
       ControlExtensions.OverrideStyleKey<MapViewer>();
+			
     }
 
+	  public MapViewer()
+	  {
+			//EM.RegisterClassHandler<MapViewer, RoutedEventArgs>(new RoutedEvent());
 
-    public override void OnApplyTemplate()
+		  //AddHandler(ZipCodeGeometryPresenter.ZipCodeGeometryPresenterMouseOverEvent,
+			 // (RoutedEventHandler) OnZipCodeGeometryPresenterMouseOver,
+			 // true);
+	  }
+
+	  private void OnZipCodeGeometryPresenterMouseOver(object Sender, RoutedEventArgs E)
+	  {
+
+	  }
+
+
+		public override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
-
       PART_Canvas = (Canvas)GetTemplateChild(nameof(PART_Canvas));
     }
+
 
     private static void onStatePropertyChanged(
       MapViewer @this,
       DPChangedEventArgs<State> args)
     {
-      var geometry = GeoSVGReader.Read(args.NewValue);
-      var pathGeometry = PathGeometry.CreateFromGeometry(geometry);
+	    var stateDeclaration = GeoSVGReader.ReadStateDeclaration(args.NewValue);
+	    @this.StateDeclaration = stateDeclaration;
 
-      @this.Geometry = pathGeometry;
+			//   var geometry = GeoSVGReader.Read(args.NewValue);
 
-      //foreach (var e in @this.Geometry.Figures)
-      //{
-      //  @this.PART_Canvas.Children.Add(new Path()
-      //  {
-      //    Data = new PathGeometry
-      //    {
-      //      Figures = new PathFigureCollection
-      //      {
-      //        e
-      //      }
-      //    }
-      //  });
-      //}
-
-    }
+			//   var pathGeometry = PathGeometry.CreateFromGeometry(geometry);
+			//@this.Geometry = pathGeometry;
+			
+	    //foreach (var e in @this.Geometry.Figures)
+			//{
+			//  @this.PART_Canvas.Children.Add(new Path()
+			//  {
+			//    Data = new PathGeometry
+			//    {
+			//      Figures = new PathFigureCollection
+			//      {
+			//        e
+			//      }
+			//    }
+			//  });
+			//}
+		}
 
 
     //protected override void OnMouseDown(MouseButtonEventArgs e)
@@ -182,50 +217,50 @@ namespace UST.Spatial.Controls
     //    });
     //}
 
-    protected override void OnMouseDown(MouseButtonEventArgs e)
-    {
-      base.OnMouseDown(e);
+    //protected override void OnMouseDown(MouseButtonEventArgs e)
+    //{
+    //  base.OnMouseDown(e);
 
-      var position = e.GetPosition(this);
+    //  var position = e.GetPosition(this);
 
-      var xProgression = position.X / ActualWidth;
-      var yProgression = position.Y / ActualHeight;
+    //  var xProgression = position.X / ActualWidth;
+    //  var yProgression = position.Y / ActualHeight;
 
-      ZoomCenterPoint = new Point(xProgression, yProgression);
+    //  ZoomCenterPoint = new Point(xProgression, yProgression);
 
-      ZoomStage nextZoomStage;
+    //  ZoomStage nextZoomStage;
 
-      if (ZoomStage.Equals(ZoomStage.Stage1))
-      {
-        nextZoomStage = ZoomStage.Stage2;
-      }
-      else if (ZoomStage.Equals(ZoomStage.Stage2))
-      {
-        nextZoomStage = ZoomStage.Stage3;
-      }
-      else if (ZoomStage.Equals(ZoomStage.Stage3))
-      {
-        nextZoomStage = ZoomStage.Stage1;
-      }
-      else
-      {
-        throw new Exception();
-      }
+    //  if (ZoomStage.Equals(ZoomStage.Stage1))
+    //  {
+    //    nextZoomStage = ZoomStage.Stage2;
+    //  }
+    //  else if (ZoomStage.Equals(ZoomStage.Stage2))
+    //  {
+    //    nextZoomStage = ZoomStage.Stage3;
+    //  }
+    //  else if (ZoomStage.Equals(ZoomStage.Stage3))
+    //  {
+    //    nextZoomStage = ZoomStage.Stage1;
+    //  }
+    //  else
+    //  {
+    //    throw new Exception();
+    //  }
 
-      ZoomStage = nextZoomStage;
+    //  ZoomStage = nextZoomStage;
 
-      BeginAnimation(
-        ZoomPercentageProperty,
-        new DoubleAnimation(
-          nextZoomStage.Value,
-          new Duration(TimeSpan.FromMilliseconds(600)))
-        {
-          EasingFunction = new CubicEase
-          {
-            EasingMode = EasingMode.EaseInOut
-          }
-        });
-    }
+    //  BeginAnimation(
+    //    ZoomPercentageProperty,
+    //    new DoubleAnimation(
+    //      nextZoomStage.Value,
+    //      new Duration(TimeSpan.FromMilliseconds(600)))
+    //    {
+    //      EasingFunction = new CubicEase
+    //      {
+    //        EasingMode = EasingMode.EaseInOut
+    //      }
+    //    });
+    //}
   }
 }
 

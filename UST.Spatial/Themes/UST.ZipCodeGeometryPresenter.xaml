@@ -1,0 +1,141 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:UST.Spatial.Controls"
+                    xmlns:cv="clr-namespace:UST.Spatial.Markup.Converters"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/Ccr.MDHybrid;component/MDHybrid/Themes/MDHybrid.Palette.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	
+	<!--<Style TargetType="Path" x:Key="PathStyle">
+		<Setter Property="Fill" Value="#021019"/>
+		<Setter Property="Stroke" Value="#144b53"/>
+		<Setter Property="StrokeThickness" Value=".5"/>
+	</Style>-->
+
+	<Style TargetType="c:ZipCodeGeometryPresenter">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="c:ZipCodeGeometryPresenter">
+					<Path x:Name="PART_ZipCodeBoundaryPath" 
+								Fill="Transparent"
+					      Stroke="{StaticResource MDH.Palette.Grey.600}">
+						<Path.StrokeThickness>
+							<Binding Path="ZipCodeBoundaryStrokeThickness">
+								<Binding.RelativeSource>
+									<RelativeSource Mode="FindAncestor" AncestorType="c:MapViewer"/>
+								</Binding.RelativeSource>
+							</Binding>
+							<!--<MultiBinding Converter="{cv:ZoomViewScaleToStrokeThicknessConverter}"
+							              ConverterParameter=".5">
+								<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
+								         Path="Scale"/>
+								<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
+								         Path="MinScale"/>
+								<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=xctk:Zoombox}" 
+								         Path="MaxScale"/>
+							</MultiBinding>-->
+						</Path.StrokeThickness>
+						<Path.Data>
+							<Binding Converter="{cv:ZipCodeDeclarationToPathGeometryConverter}"/>
+						</Path.Data>
+					</Path>
+
+					<ControlTemplate.Triggers>
+						<!--<EventTrigger SourceName="PART_ZipCodeBoundaryPath" 
+						              RoutedEvent="MouseDown">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ZipCodeBoundaryPath"
+										                               Storyboard.TargetProperty="Fill"
+										                               Duration="0:0:0">
+											<DiscreteObjectKeyFrame Value="{x:Static Brushes.Orange}" KeyTime="0"/>
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>-->
+
+						<!--<Trigger SourceName="PART_ZipCodeBoundaryPath" Property="IsMouseOver" Value="True">
+							<Setter TargetName="PART_ZipCodeBoundaryPath" Property="Stroke" Value=""/>
+						</Trigger>-->
+
+						<DataTrigger Value="True">
+							<DataTrigger.Binding>
+								<Binding ElementName="PART_ZipCodeBoundaryPath" Path="IsMouseOver"/>
+							</DataTrigger.Binding>
+							<Setter TargetName="PART_ZipCodeBoundaryPath" Property="Stroke">
+								<Setter.Value>
+									<Binding Path="ZipCodeBoundaryStroke">
+										<Binding.RelativeSource>
+											<RelativeSource Mode="FindAncestor" AncestorType="c:MapViewer"/>
+										</Binding.RelativeSource>
+									</Binding>
+								</Setter.Value>
+							</Setter>
+							<!--<DataTrigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<BrushAnimation Storyboard.TargetName="PART_ZipCodeBoundaryPath"
+										                Storyboard.TargetProperty="Fill"
+										                Duration="0:0:0.3"
+										                AccelerationRatio=".3"
+										                DecelerationRatio=".3"
+										                To="{StaticResource MDH.Palette.Grey.200}"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</DataTrigger.EnterActions>
+							<DataTrigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<BrushAnimation Storyboard.TargetName="PART_ZipCodeBoundaryPath"
+										                Storyboard.TargetProperty="Fill"
+										                Duration="0:0:0.3"
+										                AccelerationRatio=".3"
+										                DecelerationRatio=".3"
+										                To="{StaticResource MDH.Palette.Grey.200}"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</DataTrigger.ExitActions>-->
+						</DataTrigger>
+						<DataTrigger Value="False">
+							<DataTrigger.Binding>
+								<Binding ElementName="PART_ZipCodeBoundaryPath" Path="IsMouseOver"/>
+							</DataTrigger.Binding>
+							<Setter TargetName="PART_ZipCodeBoundaryPath" Property="Stroke"
+							        Value="{StaticResource MDH.Palette.Grey.600}">
+							</Setter>
+							<!--<DataTrigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<BrushAnimation Storyboard.TargetName="PART_ZipCodeBoundaryPath"
+										                Storyboard.TargetProperty="Fill"
+										                Duration="0:0:0.3"
+										                AccelerationRatio=".3"
+										                DecelerationRatio=".3"
+										                To="{StaticResource MDH.Palette.Grey.200}"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</DataTrigger.EnterActions>
+							<DataTrigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<BrushAnimation Storyboard.TargetName="PART_ZipCodeBoundaryPath"
+										                Storyboard.TargetProperty="Fill"
+										                Duration="0:0:0.3"
+										                AccelerationRatio=".3"
+										                DecelerationRatio=".3"
+										                To="{StaticResource MDH.Palette.Grey.200}"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</DataTrigger.ExitActions>-->
+						</DataTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

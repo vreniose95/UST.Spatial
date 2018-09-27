@@ -6,18 +6,234 @@
         xmlns:local="clr-namespace:UST.Spatial"
         xmlns:c="clr-namespace:UST.Spatial.Controls"
         xmlns:g="clr-namespace:UST.Spatial.GeoJSON"
+        xmlns:icons="clr-namespace:Ccr.MaterialDesign.Controls.Icons;assembly=Ccr.MaterialDesign"
         Background="{StaticResource MDH.Palette.Grey.900}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
-	<Grid>
+        Title="MainWindow" 
+        Height="1080" 
+				Width="1920">
+	<Grid Background="{StaticResource MDH.Palette.BlueGrey.950}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="80"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0"
+		      Panel.ZIndex="100"
+		      Background="{StaticResource MDH.Palette.Blue.800}"
+		      Shadow.Level="2.5"
+		      Opacity=".7">
+
+		</Grid>
+
+		<Grid Grid.Row="1"
+		      Background="{StaticResource MDH.Palette.Blue.800}"
+		      Shadow.Level="2.5"
+		      Panel.ZIndex="1000">
+			<StackPanel HorizontalAlignment="Left"
+			            ClipToBounds="True"
+			            Orientation="Horizontal">
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="Apps"/>
+				</Button>
+
+				<Label Content="UST SPATIAL" Style="{StaticResource t24pHeadline}"
+				       Padding="20 0"
+				       FontWeight="Medium"/>
+
+				<Label Content="ZIP CODE ROUTE MANAGER    1.0.0.0"
+				       Style="{StaticResource t24pHeadline}"
+				       Padding="20 0"
+				       FontWeight="Thin"
+				       Opacity=".8"/>
+			</StackPanel>
+
+
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="FileOutline"/>
+				</Button>
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="FileHidden"/>
+				</Button>
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="Ruler"/>
+				</Button>
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="Printer"/>
+				</Button>
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="FolderRemove"/>
+				</Button>
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="LockOutline"/>
+				</Button>
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="CheckCircleOutline"/>
+				</Button>
+				<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+					<icons:Icon Kind="Settings"/>
+				</Button>
+			</StackPanel>
+		</Grid>
+
+		<Grid x:Name="PART_Content"
+		      Panel.ZIndex="100"
+		      Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="350"/>
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Grid.Column="1"
+			            Orientation="Vertical"
+			            Background="{StaticResource MDH.Palette.BlueGrey.850}">
+				<Label Content="Saved Color Profiles"
+				       HorizontalContentAlignment="Left"
+				       Padding="10 20 10 5"/>
+
+				<Card Margin="10 3"
+				      Height="200">
+
+				</Card>
+				<Card Margin="10 3"
+				      Height="400">
+					<StackPanel Orientation="Vertical">
+						<Label Content="Saved Locations"
+						       HorizontalContentAlignment="Left"
+						       Padding="20 10"
+						       Style="{StaticResource _t18pLSubheadMed}"/>
+
+						<ListView Background="Transparent"
+						          BorderBrush="Transparent"
+						          BorderThickness="0"
+						          Margin="20 0">
+							<ListView.Items>
+
+								<ListViewItem >
+									<Grid Height="80">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition />
+										</Grid.RowDefinitions>
+
+										<Label Content="Austin, Texas"
+										       HorizontalContentAlignment="Left"/>
+										<StackPanel Grid.Row="1">
+											<StackPanel Orientation="Horizontal">
+												<Label Content="Coords:"
+												       Style="{StaticResource t13pBody2}"/>
+
+												<Label Content="(x: 4376.26 | y:5568.23)"
+												       Style="{StaticResource t13pBody1}"/>
+											</StackPanel>
+										</StackPanel>
+									</Grid>
+								</ListViewItem>
+								<ListViewItem >
+									<Grid Height="80">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition />
+										</Grid.RowDefinitions>
+
+										<Label Content="Dallas, Texas"
+										       HorizontalContentAlignment="Left"/>
+										<StackPanel Grid.Row="1">
+											<StackPanel Orientation="Horizontal">
+												<Label Content="Coords:"
+												       Style="{StaticResource t13pBody2}"/>
+
+												<Label Content="(x: 4376.26 | y:5568.23)"
+												       Style="{StaticResource t13pBody1}"/>
+											</StackPanel>
+										</StackPanel>
+									</Grid>
+								</ListViewItem>
+								<ListViewItem >
+									<Grid Height="80">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition />
+										</Grid.RowDefinitions>
+
+										<Label Content="Fort Worth, Texas"
+										       HorizontalContentAlignment="Left"/>
+										<StackPanel Grid.Row="1">
+											<StackPanel Orientation="Horizontal">
+												<Label Content="Coords:"
+												       Style="{StaticResource t13pBody2}"/>
+
+												<Label Content="(x: 4376.26 | y:5568.23)"
+												       Style="{StaticResource t13pBody1}"/>
+											</StackPanel>
+										</StackPanel>
+									</Grid>
+								</ListViewItem>
+								<ListViewItem >
+									<Grid Height="80">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition />
+										</Grid.RowDefinitions>
+
+										<Label Content="Corpus Christi, Texas"
+										       HorizontalContentAlignment="Left"/>
+										<StackPanel Grid.Row="1">
+											<StackPanel Orientation="Horizontal">
+												<Label Content="Coords:"
+												       Style="{StaticResource t13pBody2}"/>
+
+												<Label Content="(x: 4376.26 | y:5568.23)"
+												       Style="{StaticResource t13pBody1}"/>
+											</StackPanel>
+										</StackPanel>
+									</Grid>
+								</ListViewItem>
+							</ListView.Items>
+						</ListView>
+					</StackPanel>
+				</Card>
+			</StackPanel>
+
+			<Grid Column="0">
+				<c:MapViewer State="{x:Static g:State.Kentucky}"/>
+			</Grid>
+
+			<!--<Grid ColumnSpan="2">
+				<Button Style="{StaticResource FloatingActionButton}"
+											Width="100"
+											Height="100"
+											HorizontalAlignment="Right"
+											VerticalAlignment="Bottom"
+											Background="{StaticResource mtLightBlueA200}"
+											Command="{Binding MenuExpandCommand}">
+					<Button.RenderTransform>
+						<TranslateTransform X="-100" Y="-70"/>
+					</Button.RenderTransform>
+					<Path Style="{StaticResource drawableadd}"/>
+				</Button>
+			</Grid>-->
+		</Grid>
+	</Grid>
+	<!--<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition />
 		</Grid.RowDefinitions>
+
 		<Grid Height="90" 
 		      Background="{StaticResource MDH.Palette.Teal.500}"
 		      Shadow.Level="3">
-
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition />
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Button Style="{StaticResource MDH.Controls.Buttons.FlatButton.LightSurface}">
+				<icons:Icon Kind="Apps" Foreground="White"/>
+			</Button>
 		</Grid>
 
 		<Grid Row="1">
@@ -27,15 +243,21 @@
 			</Grid.ColumnDefinitions>
 
 			<c:MapViewer State="{x:Static g:State.Texas}"/>
+
 			<Grid Grid.Column="1" 
 			      Width="350" 
 			      Background="{StaticResource MDH.Palette.BlueGrey.800}"
 			      Shadow.Level="1.5">
+				<ListView>
+
+				</ListView>
 
 			</Grid>
 
 		</Grid>
-		<!--<controls:MapViewer State="{x:Static geoJson:State.Arizona}"/>-->
+		-->
+	<!--<controls:MapViewer State="{x:Static geoJson:State.Arizona}"/>-->
+	<!--
 
-	</Grid>
+	</Grid>-->
 </Window>

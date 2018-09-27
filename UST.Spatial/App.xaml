@@ -7,12 +7,64 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/Ccr.MDHybrid;component/MDHybrid/Themes/Generic.xaml"/>
-				<ResourceDictionary>
-					<!--<spatial:AppBootstrapper x:Key="bootstrapper" />-->
-				</ResourceDictionary>
-				<ResourceDictionary Source="GeometryMaps/ak.xaml"/>
-				<ResourceDictionary Source="GeometryMaps/dc.xaml"/>
+				<!--<ResourceDictionary>
+					<spatial:AppBootstrapper x:Key="bootstrapper" />
+				</ResourceDictionary>-->
+
+				<ResourceDictionary Source="GeometryMaps/al.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ar.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/az.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ca.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/co.xaml"/>
+				
+				<ResourceDictionary Source="GeometryMaps/ct.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/de.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/fl.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ga.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ia.xaml"/>
+				
+				<ResourceDictionary Source="GeometryMaps/id.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/il.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/in.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ks.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ky.xaml"/>
+
+				<ResourceDictionary Source="GeometryMaps/la.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ma.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/md.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/me.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/mi.xaml"/>
+				
+				<ResourceDictionary Source="GeometryMaps/mn.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/mo.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ms.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/nc.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/nd.xaml"/>
+
+				<ResourceDictionary Source="GeometryMaps/ne.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/nh.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/nj.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/nm.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ny.xaml"/>
+
+				<ResourceDictionary Source="GeometryMaps/oh.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/or.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/pa.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ri.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/sc.xaml"/>
+
+				<ResourceDictionary Source="GeometryMaps/sd.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/tn.xaml"/>
 				<ResourceDictionary Source="GeometryMaps/tx.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/ut.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/va.xaml"/>
+
+				<ResourceDictionary Source="GeometryMaps/vt.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/wa.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/wi.xaml"/>
+				<ResourceDictionary Source="GeometryMaps/wy.xaml"/>
+
+				<ResourceDictionary Source="Themes/UST.ZipCodeGeometryPresenter.xaml"/>
 				<ResourceDictionary Source="Themes/UST.MapViewer.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>

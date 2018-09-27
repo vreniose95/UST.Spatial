@@ -21,7 +21,7 @@ namespace UST.Spatial
         { "WindowState" , WindowState.Maximized }
       };
 
-      DisplayRootViewFor<RootViewModel>(settings);
+      DisplayRootViewFor<MainViewModel>(settings);
     }
   }
 }

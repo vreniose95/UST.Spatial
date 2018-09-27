@@ -1,27 +1,25 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media;
+﻿using System.Windows.Media;
+using Ccr.Xaml.Markup.Converters.Infrastructure;
+using UST.Spatial.GeoJSON;
 
 namespace UST.Spatial.Markup.Converters
 {
-  public class PathFigureToPathFigureGeometryConverter : IValueConverter //XamlConverter<PathFigure, NullParam, PathFigureCollection>
-  {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-      if (!(value is PathFigure pathFigure))
-        throw new NotSupportedException();
-      
-      return new PathFigureCollection
-      {
-        pathFigure
-      };
+	public class ZipCodeDeclarationToPathGeometryConverter
+		: XamlConverter<
+			ZipCodeDeclaration,
+			NullParam,
+			PathGeometry>
+	{
+		public override PathGeometry Convert(
+			ZipCodeDeclaration zipCodeDeclaration, 
+			NullParam param)
+		{
+			var pathGeometry = PathGeometry
+				.CreateFromGeometry(
+					zipCodeDeclaration
+						.Geometry);
 
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-      throw new NotImplementedException();
-    }
-  }
+			return pathGeometry;
+		}
+	}
 }
