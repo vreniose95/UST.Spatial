@@ -7,11 +7,15 @@
         xmlns:c="clr-namespace:UST.Spatial.Controls"
         xmlns:g="clr-namespace:UST.Spatial.GeoJSON"
         xmlns:icons="clr-namespace:Ccr.MaterialDesign.Controls.Icons;assembly=Ccr.MaterialDesign"
+        xmlns:views="clr-namespace:UST.Spatial.Views"
         Background="{StaticResource MDH.Palette.Grey.900}"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="1080" 
 				Width="1920">
+	<Window.DataContext>
+		<views:MainViewModel />
+	</Window.DataContext>
 	<Grid Background="{StaticResource MDH.Palette.BlueGrey.950}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="40"/>
@@ -85,6 +89,109 @@
 				<ColumnDefinition/>
 				<ColumnDefinition Width="350"/>
 			</Grid.ColumnDefinitions>
+			
+			<Grid Height="70"
+						VerticalAlignment="Top"
+			      Background="{StaticResource MDH.Palette.Blue.900}"
+			      Shadow.Level="2"
+			      Panel.ZIndex="100">
+				<StackPanel HorizontalAlignment="Left"
+				            ClipToBounds="True"
+				            Orientation="Horizontal">
+					<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="Brush"/>
+					</Button>
+
+					<Label Content="Brush Mode:"
+					       Style="{StaticResource _t18pLSubheadMed}"
+					       Padding="10 0"
+					       FontWeight="Light"/>
+
+					<Border Background="{StaticResource MDH.Palette.Pink.700}"
+									Shadow.Level="2"
+					        CornerRadius="25"
+					        Margin="10">
+						<Label Content="Multi Select"
+						       Style="{StaticResource t20pTitle}"
+						       Padding="10 0"
+						       FontWeight="Normal"/>
+					</Border>
+					
+					
+					<Border Background="{StaticResource MDH.Palette.BlueGrey.800}"
+					        Shadow.Level="1"
+					        CornerRadius="25"
+					        Margin="10">
+						<Label Content="Single Select"
+						       Style="{StaticResource t20pTitle}"
+						       Padding="10 0"
+						       FontWeight="Normal"/>
+					</Border>
+
+					<Border Background="{StaticResource MDH.Palette.BlueGrey.800}"
+					        Shadow.Level="1"
+					        CornerRadius="25"
+					        Margin="10">
+						<Label Content="Bitwise XOR"
+						       Style="{StaticResource t20pTitle}"
+						       Padding="10 0"
+						       FontWeight="Normal"/>
+					</Border>
+				</StackPanel>
+
+
+				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+					<Label Content="{Binding BitwiseId}"
+					       Style="{StaticResource t20pTitle}"
+					       Padding="10 0"
+					       FontWeight="Normal"/>
+					<CheckBox Content="S" IsChecked="{Binding IsSundayChecked}">
+
+					</CheckBox>
+					<CheckBox Content="M" IsChecked="{Binding IsMondayChecked}">
+
+					</CheckBox>
+					<CheckBox Content="T" IsChecked="{Binding IsTuesdayChecked}">
+
+					</CheckBox>
+					<CheckBox Content="W" IsChecked="{Binding IsWednesdayChecked}">
+
+					</CheckBox>
+					<CheckBox Content="T" IsChecked="{Binding IsThursdayChecked}">
+
+					</CheckBox>
+					<CheckBox Content="F" IsChecked="{Binding IsFridayChecked}">
+
+					</CheckBox>
+					<CheckBox Content="S" IsChecked="{Binding IsSaturdayChecked}">
+
+					</CheckBox>
+					<!--<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="FileOutline"/>
+					</Button>
+					<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="FileHidden"/>
+					</Button>
+					<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="Ruler"/>
+					</Button>
+					<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="Printer"/>
+					</Button>
+					<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="FolderRemove"/>
+					</Button>
+					<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="LockOutline"/>
+					</Button>
+					<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="CheckCircleOutline"/>
+					</Button>
+					<Button Style="{StaticResource MDH.Buttons.PathButton}" Padding="15">
+						<icons:Icon Kind="Settings"/>
+					</Button>-->
+				</StackPanel>
+			</Grid>
 
 			<StackPanel Grid.Column="1"
 			            Orientation="Vertical"
@@ -198,7 +305,8 @@
 			</StackPanel>
 
 			<Grid Column="0">
-				<c:MapViewer State="{x:Static g:State.Kentucky}"/>
+				<c:MapViewer State="{x:Static g:State.Georgia}" 
+				             CurrentSelectionProfileId="{Binding BitwiseId, Mode=OneWay}"/>
 			</Grid>
 
 			<!--<Grid ColumnSpan="2">

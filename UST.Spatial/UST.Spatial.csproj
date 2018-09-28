@@ -101,11 +101,15 @@
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Controls\ZipCodeGeometryPresenter.cs" />
-    <Compile Include="Controls\ZoomStage.cs" />
     <Compile Include="GeoJSON\StateDeclaration.cs" />
     <Compile Include="GeoJSON\ZipCodeDeclaration.cs" />
+    <Compile Include="Markup\Converters\DeliveryScheduleToPathFillConverter.cs" />
     <Compile Include="Markup\Converters\PathFigureToPathFigureGeometryConverter.cs" />
     <Compile Include="Markup\Converters\ZoomViewScaleToStrokeThicknessConverter.cs" />
+    <Compile Include="Models\NamedSavedViewport.cs" />
+    <Compile Include="Models\NamedScheduleConfigurationProfile.cs" />
+    <Compile Include="Primitives\BehavioralInjection\Assists\ItemsControlAssist.cs" />
+    <Compile Include="Primitives\BehavioralInjection\Services\ItemsControlContainerZIndexManagerService.cs" />
     <Compile Include="Scripting\JsonXamlPostProcessor.cs" />
     <Compile Include="ViewModels\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>

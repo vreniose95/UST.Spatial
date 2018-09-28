@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:c="clr-namespace:UST.Spatial.Controls"
                     xmlns:cv="clr-namespace:UST.Spatial.Markup.Converters"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:views="clr-namespace:UST.Spatial.Views">
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="pack://application:,,,/Ccr.MDHybrid;component/MDHybrid/Themes/MDHybrid.Palette.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
@@ -15,12 +16,27 @@
 	</Style>-->
 
 	<Style TargetType="c:ZipCodeGeometryPresenter">
+		<Setter Property="DeliveryConfigurationCurrentlyPaintingId">
+			<Setter.Value>
+				<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=c:MapViewer}"
+								 Path="DataContext.(views:MainViewModel.BitwiseId)"/>
+			</Setter.Value>
+		</Setter>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="c:ZipCodeGeometryPresenter">
-					<Path x:Name="PART_ZipCodeBoundaryPath" 
-								Fill="Transparent"
+					<Path x:Name="PART_ZipCodeBoundaryPath"
 					      Stroke="{StaticResource MDH.Palette.Grey.600}">
+						<Path.Fill>
+							<MultiBinding Converter="{cv:DeliveryScheduleIdToPathFillConverter}">
+								<Binding Path="DeliverySchedule"
+								         RelativeSource="{RelativeSource TemplatedParent}"/>
+								<Binding Path="DeliveryConfigurationCurrentlyPaintingId"
+								         RelativeSource="{RelativeSource TemplatedParent}"/>
+
+							</MultiBinding>
+
+						</Path.Fill>
 						<Path.StrokeThickness>
 							<Binding Path="ZipCodeBoundaryStrokeThickness">
 								<Binding.RelativeSource>

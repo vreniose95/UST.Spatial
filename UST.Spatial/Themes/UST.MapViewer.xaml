@@ -3,7 +3,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:c="clr-namespace:UST.Spatial.Controls"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:geoJson="clr-namespace:UST.Spatial.GeoJSON">
+                    xmlns:geoJson="clr-namespace:UST.Spatial.GeoJSON"
+                    xmlns:assists="clr-namespace:UST.Spatial.Primitives.BehavioralInjection.Assists"
+                    xmlns:services="clr-namespace:UST.Spatial.Primitives.BehavioralInjection.Services">
 
 	<Style TargetType="c:MapViewer">
 		<Setter Property="Background" Value="#021019"/>
@@ -31,7 +33,16 @@
 										<Binding RelativeSource="{RelativeSource TemplatedParent}" 
 										         Path="StateDeclaration.GeometryGroup.Bounds.Height"/>
 									</Canvas.Height>
+
 									<ItemsControl>
+										<!--<ItemsControl.ItemContainerStyle>
+											<Style TargetType="ContentPresenter">
+
+											</Style>
+										</ItemsControl.ItemContainerStyle>-->
+										<assists:ItemsControlAssist.ZIndexManagerService>
+											<services:ItemsControlContainerZIndexManagerService/>
+										</assists:ItemsControlAssist.ZIndexManagerService>
 										<ItemsControl.ItemsPanel>
 											<ItemsPanelTemplate>
 												<Canvas/>
