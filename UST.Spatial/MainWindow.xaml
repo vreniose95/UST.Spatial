@@ -145,7 +145,8 @@
 					       Style="{StaticResource t20pTitle}"
 					       Padding="10 0"
 					       FontWeight="Normal"/>
-					<CheckBox Content="S" IsChecked="{Binding IsSundayChecked}">
+					<CheckBox Content="S" IsChecked="{Binding IsSundayChecked}"
+					          FontSize="24pt" Height="40" Width="90" >
 
 					</CheckBox>
 					<CheckBox Content="M" IsChecked="{Binding IsMondayChecked}">

@@ -94,29 +94,30 @@ namespace UST.Spatial.Controls
 		{
 			ControlExtensions.OverrideStyleKey<MapViewer>();
 
-			EM.RegisterClassHandler<MapViewer, RoutedEventHandler>(
-				ZipCodeGeometryPresenter.ZipCodeGeometryPresenterMouseOverEvent,
-				onZipCodeGeometryPresenterMouseOver);
 
-			EM.RegisterClassHandler<MapViewer, RoutedEventHandler>(
-				ZipCodeGeometryPresenter.ZipCodeGeometryPresenterMouseLeaveEvent,
-				onZipCodeGeometryPresenterMouseLeave);
+			EM.RegisterClassHandler<MapViewer, MouseEventHandler>(
+				ZipCodeGeometryPresenter.ZipCodeMouseEnterEvent,
+				onZipCodeMouseEnter);
 
-			EM.RegisterClassHandler<MapViewer, RoutedEventHandler>(
-				ZipCodeGeometryPresenter.ZipCodeGeometryPresenterClickedEvent,
-				onZipCodeGeometryPresenterClick);
+			EM.RegisterClassHandler<MapViewer, MouseEventHandler>(
+				ZipCodeGeometryPresenter.ZipCodeMouseLeaveEvent,
+				onZipCodeMouseLeave);
 
+			EM.RegisterClassHandler<MapViewer, MouseButtonEventHandler>(
+				ZipCodeGeometryPresenter.ZipCodeMouseUpEvent,
+				onZipCodeMouseUp);
+
+			EM.RegisterClassHandler<MapViewer, MouseButtonEventHandler>(
+				ZipCodeGeometryPresenter.ZipCodeMouseDownEvent,
+				onZipCodeMouseDown);
+
+			EM.RegisterClassHandler<MapViewer, MouseButtonEventHandler>(
+				ZipCodeGeometryPresenter.ZipCodeClickEvent,
+				onZipCodeClick);
 		}
 
-		public MapViewer()
-		{
-			//AddHandler(MouseEnterEvent, new MouseEventHandler(onVisualDescendentMouseEnter));
-			//AddHandler(MouseLeaveEvent, new MouseEventHandler(onVisualDescendentMouseLeave));
-		}
 
-
-
-		private static void onZipCodeGeometryPresenterMouseOver(object sender, RoutedEventArgs args)
+		private static void onZipCodeMouseEnter(object sender, MouseEventArgs args)
 		{
 			if (args.OriginalSource is ZipCodeGeometryPresenter presenter)
 			{
@@ -126,13 +127,47 @@ namespace UST.Spatial.Controls
 			}
 		}
 
-		private static void onZipCodeGeometryPresenterMouseLeave(object sender, RoutedEventArgs args)
+		private static void onZipCodeMouseLeave(object sender, MouseEventArgs args)
 		{
 			if (args.OriginalSource is ZipCodeGeometryPresenter presenter)
 			{
 				var contentPresenter = presenter.FindVisualAncestor<ContentPresenter>();
 				Panel.SetZIndex(contentPresenter, 100);
 				args.Handled = true;
+			}
+		}
+
+		private static void onZipCodeMouseDown(object sender, MouseButtonEventArgs args)
+		{
+			if (args.OriginalSource is ZipCodeGeometryPresenter presenter)
+			{
+				var contentPresenter = presenter.FindVisualAncestor<ContentPresenter>();
+				
+				args.Handled = true;
+			}
+		}
+
+		private static void onZipCodeMouseUp(object sender, MouseButtonEventArgs args)
+		{
+			if (args.OriginalSource is ZipCodeGeometryPresenter presenter)
+			{
+				var contentPresenter = presenter.FindVisualAncestor<ContentPresenter>();
+				
+				args.Handled = true;
+			}
+		}
+
+		private static void onZipCodeClick(object sender, MouseButtonEventArgs args)
+		{
+			if (args.OriginalSource is ZipCodeGeometryPresenter presenter)
+			{
+				var dayConfig = dayConfigs[index];
+
+				presenter.DeliverySchedule.SetShouldDeliverOnDays(true, dayConfig);
+
+				index++;
+				if (index >= dayConfigs.Count)
+					index = 0;
 			}
 		}
 
@@ -149,19 +184,7 @@ namespace UST.Spatial.Controls
 			new []{Day.Monday}
 		};
 
-		private static void onZipCodeGeometryPresenterClick(object sender, RoutedEventArgs args)
-		{
-			if (args.OriginalSource is ZipCodeGeometryPresenter presenter)
-			{
-				var dayConfig = dayConfigs[index];
-
-				presenter.DeliverySchedule.SetShouldDeliverOnDays(true, dayConfig);
-
-				index++;
-				if (index >= dayConfigs.Count)
-					index = 0;
-			}
-		}
+		
 
 
 
